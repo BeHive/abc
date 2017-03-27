@@ -34,14 +34,16 @@
 		
 		<!-- Navbar -->
 		<div class="abc-top">
+            <div id="languageSelector" class="abc-theme" style="position: absolute;right: 10px;top: 10px;">
+                <a href="/?lang=pt" style="display:inline" class="abc-teal">PT</a> | <a href="/?lang=en" style="display:inline" class="abc-teal">EN</a>
+            </div>
 			<ul class="abc-navbar abc-theme-d2 abc-left-align abc-large">
 				<li class="abc-hide-large abc-opennav abc-right" style="line-height: 97px;min-width: 97px;text-align: center;">
 					<a class="abc-hover-white abc-large abc-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
 				</li>
 				<li>
                     <a href="/<?=$lang=='pt'?'':'?lang=en'?>" style="display:inline" class="abc-teal"><img src="/assets/images/ABCLEGAL.png"></a>
-                    <a href="/?lang=pt" style="display:inline" class="abc-teal">pt</a>
-                    <a href="/?lang=en" style="display:inline" class="abc-teal">en</a></li>
+                </li>
 
                 <?for($i = count($data['menu'])-1; $i >= 0; $i--){?>
 					<li class="abc-hide-small abc-hide-medium abc-right" style="line-height: 97px;">
