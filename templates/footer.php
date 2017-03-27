@@ -1,44 +1,37 @@
 		<!-- Footer -->
 		
-		<footer class="abc-theme-d1 abc-center">
+		<footer class="abc-theme-light abc-center">
 			<div class="abc-row">
-				<div class="abc-col abc-padding-bottom abc-small m4">
+                <div class="abc-col abc-padding-bottom abc-small m3">
                     <div class="abc-left-align abc-margin-left abc-padding-16">
                         <span class="abc-xlarge abc-border-teal abc-bottombar"><?=$lang=='pt'?'Contactos':'Contacts'?></span>
                     </div>
-                    <div class="abc-left-align abc-margin-left">
-                        <span class="abc-text-teal"><?=$lang=='pt'?'Lisboa':'Lisbon'?>:</span>
+                    <div class="abc-left-align abc-margin-left" style="font-size: 10px;">
+                        <p>
+                        ABC Legal – Sociedade de Advogados, RL<br>
                         <address>Avenida Conselheiro Fernando de Sousa 19 B-C<br>
-                            1070-072 Lisboa - Portugal</address>Tel. <a href="tel:+351213584480">+351 21 358 44 80</a><br>Fax.<a href="tel:+351213584489">+351 21 358 44 89</a><p></p>
+                            1070-072 Lisboa - Portugal</address>
+                    </div>
 
-                        <span class="abc-text-teal">Torres Vedras:</span>
-                        <address>Largo Irmã Benedita Vale Jordão Nº 1 Loja A<br>
-                            2560-526 – Torres Vedras- Silveira</address>Tel. <a href="tel:+351261936016">+351 261 936 016</a><br>Fax.<a href="tel:+351261936018">+351 261 936 018</a><p></p>
-                        <a href="mailto:abclegal@abclegal.com.pt">abclegal@abclegal.com.pt</a>
+
+                </div>
+                <div class="abc-col abc-padding-bottom abc-small m2">
+                    <div class="abc-left-align abc-margin-left abc-padding-16">
+                        <span class="abc-xlarge">&nbsp;</span>
                     </div>
-                    <div class="abc-row abc-left-align abc-margin-left">
-                        <h4><?=$lang=='pt'?'Siga-nos nas redes sociais':'Follow us on Social Media'?></h4>
-                        <?if(isset($data['social']['facebook']) && $data['social']['facebook'] != ""){?>
-                            <a class="abc-btn-floating abc-teal" rel="nofollow" target=_blank href="http://www.facebook.com/<?=$data['social']['facebook']?>" title="Facebook"><i class="fa fa-facebook"></i></a>
-                        <?}?>
-                        <?if(isset($data['social']['twitter']) && $data['social']['twitter'] != ""){?>
-                            <a class="abc-btn-floating abc-teal" rel="nofollow" href="http://www.twitter.com/<?=$data['social']['twitter']?>" title="Twitter"><i class="fa fa-twitter"></i></a>
-                        <?}?>
-                        <?if(isset($data['social']['google']) && $data['social']['google'] != ""){?>
-                            <a class="abc-btn-floating abc-teal" rel="nofollow" href="https://plus.google.com/<?=$data['social']['google']?>" title="Google +"><i class="fa fa-google-plus"></i></a>
-                        <?}?>
-                        <?if(isset($data['social']['linkedin']) && $data['social']['linkedin'] != ""){?>
-                            <a class="abc-btn-floating abc-teal" rel="nofollow" target=_blank href="https://www.linkedin.com/company/<?=$data['social']['linkedin']?>" title="Linkedin"><i class="fa fa-linkedin"></i></a>
-                        <?}?>
+                    <div class="abc-left-align abc-margin-left" style="font-size: 10px">
+                        <p>
+                        Tel. <a href="tel:+351213584480">+351 21 358 44 80</a><br>
+                        Fax.<a href="tel:+351213584489">+351 21 358 44 89</a>
+                            <a href="mailto:abclegal@abclegal.com.pt">abclegal@abclegal.com.pt</a>
                     </div>
-                    <div class="abc-left abc-margin-left">
-                        <a href="/disclaimer<?=$lang=='pt'?'':'?lang=en'?>">disclaimer</a>
-                    </div>
+
+
                 </div>
 
-				<div class="abc-col m8">
+                <div class="abc-col m5">
 					<!-- Google Maps -->
-					<div id="googleMap" style="width:100%;height:417px;"></div>
+					<div id="googleMap" style="width:100%;height:160px;"></div>
 					<script src="http://maps.googleapis.com/maps/api/js"></script>
 					<script>
 						var myCenter = new google.maps.LatLng(38.7259378,-9.1610237);
@@ -59,6 +52,26 @@
 						google.maps.event.addDomListener(window, 'load', initialize);
 					</script>
 				</div>
+                <div class="abc-col m2">
+                    <div class="abc-row abc-left-align abc-margin-left">
+                        <h4><?=$lang=='pt'?'Siga-nos nas redes sociais':'Follow us on Social Media'?></h4>
+                        <?if(isset($data['social']['facebook']) && $data['social']['facebook'] != ""){?>
+                            <a class="abc-btn-floating abc-teal" rel="nofollow" target=_blank href="http://www.facebook.com/<?=$data['social']['facebook']?>" title="Facebook"><i class="fa fa-facebook"></i></a>
+                        <?}?>
+                        <?if(isset($data['social']['twitter']) && $data['social']['twitter'] != ""){?>
+                            <a class="abc-btn-floating abc-teal" rel="nofollow" href="http://www.twitter.com/<?=$data['social']['twitter']?>" title="Twitter"><i class="fa fa-twitter"></i></a>
+                        <?}?>
+                        <?if(isset($data['social']['google']) && $data['social']['google'] != ""){?>
+                            <a class="abc-btn-floating abc-teal" rel="nofollow" href="https://plus.google.com/<?=$data['social']['google']?>" title="Google +"><i class="fa fa-google-plus"></i></a>
+                        <?}?>
+                        <?if(isset($data['social']['linkedin']) && $data['social']['linkedin'] != ""){?>
+                            <a class="abc-btn-floating abc-teal" rel="nofollow" target=_blank href="https://www.linkedin.com/company/<?=$data['social']['linkedin']?>" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+                        <?}?>
+                    </div>
+                    <div class="abc-right abc-margin-right">
+                        <a href="/disclaimer<?=$lang=='pt'?'':'?lang=en'?>">disclaimer</a>
+                    </div>
+                </div>
 			</div>
 		</footer>
 
