@@ -286,14 +286,14 @@ $app->group('/admin', function () use ($app, $db) {
             $sociedade_en = utf8_encode($app->request->post('sociedade_en'));
             $filosofia = utf8_encode($app->request->post('filosofia'));
             $filosofia_en = utf8_encode($app->request->post('filosofia_en'));
-            $beliefs = utf8_encode($app->request->post('beliefs'));
-            $beliefs_en = utf8_encode($app->request->post('beliefs_en'));
+            //$beliefs = utf8_encode($app->request->post('beliefs'));
+            //$beliefs_en = utf8_encode($app->request->post('beliefs_en'));
             $areas = utf8_encode($app->request->post('areas'));
             $areas_en = utf8_encode($app->request->post('areas_en'));
             $pictureList = $app->request->post('pictureList');
 
-            $sth = $db->prepare('UPDATE homepage SET pictureList = ?, sociedade = ?,sociedade_en = ?,filosofia = ?,filosofia_en = ?,beliefs = ?,beliefs_en = ?,areas = ?,areas_en = ?');
-            $sth->execute(array($pictureList, $sociedade, $sociedade_en,$filosofia,$filosofia_en,$beliefs,$beliefs_en,$areas,$areas_en));
+            $sth = $db->prepare('UPDATE homepage SET pictureList = ?, sociedade = ?,sociedade_en = ?,filosofia = ?,filosofia_en = ?,areas = ?,areas_en = ?');
+            $sth->execute(array($pictureList, $sociedade, $sociedade_en,$filosofia,$filosofia_en,$areas,$areas_en));
 
             flash('green', "Homepage alterada com sucesso");
         } catch (Exception $e) {

@@ -42,12 +42,6 @@
 			</div>
 		<!-- filosofia -->
 
-		<!-- sociedade -->
-        	<div class="abc-content abc-container">
-                <? include 'hp_beliefs.php' ?>
-			</div>
-		<!-- sociedade -->
-
 		<!-- areas de pratica -->
         	<div class="abc-container">
 				<? include 'hp_areas_de_pratica.php' ?>

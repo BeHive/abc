@@ -61,16 +61,6 @@
 		<?=utf8_decode($hp['filosofia_en'])?></textarea>
     </p>
     <p>
-        Texto para 'Acreditamos que'
-        <textarea class="abc-input abc-padding-16 abc-border" id="item-beliefs" name="beliefs" type="text" placeholder="" maxlength="20000" value="">
-		<?=utf8_decode($hp['beliefs'])?></textarea>
-    </p>
-    <p>
-        Texto para 'Acreditamos que' em inglês
-        <textarea class="abc-input abc-padding-16 abc-border" id="item-beliefs_en" name="beliefs_en" type="text" placeholder="" maxlength="20000" value="">
-		<?=utf8_decode($hp['beliefs_en'])?></textarea>
-    </p>
-    <p>
         Texto para 'Áreas de prática'
         <textarea class="abc-input abc-padding-16 abc-border" id="item-areas" name="areas" type="text" placeholder="" maxlength="20000" value="">
 		<?=utf8_decode($hp['areas'])?></textarea>
