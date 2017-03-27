@@ -396,11 +396,11 @@ input[type=checkbox].abc-check:disabled+.abc-validate,input[type=radio].abc-radi
     padding-bottom: 1px;
     padding-left: 16px;
     background: red;
-    background: -webkit-linear-gradient(white, #4EBEAD);
-    background: -o-linear-gradient(white, #4EBEAD);
-    background: -moz-linear-gradient(white, #4EBEAD);
-    background: linear-gradient(white, #4EBEAD);
-    opacity: 0.9;
+    background: -webkit-linear-gradient(white, #000);
+    background: -o-linear-gradient(white, #000);
+    background: -moz-linear-gradient(white, #000);
+    background: linear-gradient(white, #000);
+    opacity: 0.5;
 }
 
 
