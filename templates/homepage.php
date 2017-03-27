@@ -31,64 +31,33 @@
 		Contactos e Mapa Google. Check!
 		-->
 		<!-- sociedade -->
-        <div class="zoneLight">
-			<div class="abc-content abc-container">
+        	<div class="abc-content abc-container">
                 <? include 'hp_sociedade.php' ?>
 			</div>
-		</div>
 		<!-- sociedade -->
-		
-		<div class="zoneSplitter toDark">
-            <div class="left"></div>
-            <div class="right"></div>
-        </div>
-        
-		<!-- sociedade -->
-        <div class="zoneDark">
-			<div class="abc-content abc-container">
+
+		<!-- filosofia -->
+        	<div class="abc-content abc-container">
                 <? include 'hp_filosofia.php' ?>
 			</div>
-		</div>
+		<!-- filosofia -->
+
 		<!-- sociedade -->
-		
-		<div class="zoneSplitter fromDark">
-            <div class="left"></div>
-            <div class="right"></div>
-        </div>
-        
-		<!-- sociedade -->
-        <div class="zoneLight">
-			<div class="abc-content abc-container">
+        	<div class="abc-content abc-container">
                 <? include 'hp_beliefs.php' ?>
 			</div>
-		</div>
 		<!-- sociedade -->
-		
-		<div class="zoneSplitter toDark">
-            <div class="left"></div>
-            <div class="right"></div>
-        </div>
-        
+
 		<!-- areas de pratica -->
-        <div class="zoneDark">
-			<div class="abc-container">
+        	<div class="abc-container">
 				<? include 'hp_areas_de_pratica.php' ?>
 			</div>
-		</div>
 		<!-- areas de pratica -->
 
-
-		<div class="zoneSplitter fromDark">
-            <div class="left"></div>
-            <div class="right"></div>
-        </div>
-
-		<!-- agendamentos -->
-        <div class="zoneLight">
-			<div class="abc-content abc-container">
+        <!-- agendamentos -->
+        	<div class="abc-content abc-container">
                 <? include 'hp_agendamentos.php' ?>
 			</div>
-		</div>
 		<!-- agendamentos -->
 		        
 	</div>
