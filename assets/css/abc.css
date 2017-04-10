@@ -353,6 +353,7 @@ input[type=checkbox].abc-check:disabled+.abc-validate,input[type=radio].abc-radi
 
 
 
+.abc-theme-l6 {color:#777 !important; background-color:#ffffff !important}
 .abc-theme-l5 {color:#000 !important; background-color:#f0f0f0 !important}
 .abc-theme-l4 {color:#000 !important; background-color:#cccccc !important}
 .abc-theme-l3 {color:#fff !important; background-color:#999999 !important}
@@ -399,7 +400,7 @@ input[type=checkbox].abc-check:disabled+.abc-validate,input[type=radio].abc-radi
     background: -webkit-linear-gradient(white, #000);
     background: -o-linear-gradient(white, #000);
     background: -moz-linear-gradient(white, #000);
-    background: linear-gradient(white, #000);
+    background: linear-gradient(white, #4EBEAD);
     opacity: 0.5;
 }
 
@@ -428,7 +429,7 @@ input[type=checkbox].abc-check:disabled+.abc-validate,input[type=radio].abc-radi
     display: block;
     margin: auto;
 }
-.abc-team-chevron{
+.abc-team-chevron, .abc-blog-chevron{
     font-size: 5em !important;
     line-height: 1.5em !important;
 }
@@ -443,3 +444,18 @@ input[type=checkbox].abc-check:disabled+.abc-validate,input[type=radio].abc-radi
     padding-bottom: 5px;
     padding-right: 10px;
 }
+
+.menu-logo{
+    display: inline-block;
+    background-image: url('/assets/images/ABCLEGAL-branco.png');
+    width: 335px;
+    height: 170px;
+}
+
+.abc-top:hover,.abc-top:hover #languageSelector,.abc-top:hover ul{
+    color:#4EBEAD !important
+}
+/*.abc-top:hover .menu-logo{
+    background-image: url('/assets/images/ABCLEGAL.png');
+}
+*/

@@ -42,11 +42,17 @@
 			</div>
 		<!-- filosofia -->
 
-		<!-- areas de pratica -->
-        	<div class="abc-container">
-				<? include 'hp_areas_de_pratica.php' ?>
-			</div>
-		<!-- areas de pratica -->
+        <!-- areas de pratica -->
+        <div class="abc-container">
+            <? include 'hp_areas_de_pratica.php' ?>
+        </div>
+        <!-- areas de pratica -->
+
+        <!-- blog -->
+        <div class="abc-container" style="background-color: #f2f2f2">
+            <? include 'hp_comunicacao.php' ?>
+        </div>
+        <!-- blog -->
 
         <!-- agendamentos -->
         	<div class="abc-content abc-container">

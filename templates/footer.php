@@ -4,7 +4,7 @@
 			<div class="abc-row">
                 <div class="abc-col abc-padding-bottom abc-small m3">
                     <div class="abc-left-align abc-margin-left abc-padding-16">
-                        <span class="abc-xlarge abc-border-teal abc-bottombar"><?=$lang=='pt'?'Contactos':'Contacts'?></span>
+                        <span class="abc-xlarge"><?=$lang=='pt'?'Contactos':'Contacts'?></span>
                     </div>
                     <div class="abc-left-align abc-margin-left" style="font-size: 10px;">
                         <p>
@@ -53,7 +53,7 @@
 					</script>
 				</div>
                 <div class="abc-col m2">
-                    <div class="abc-row abc-left-align abc-margin-left">
+                    <div class="abc-margin-right abc-margin-left">
                         <h4><?=$lang=='pt'?'Siga-nos nas redes sociais':'Follow us on Social Media'?></h4>
                         <?if(isset($data['social']['facebook']) && $data['social']['facebook'] != ""){?>
                             <a class="abc-btn-floating abc-teal" rel="nofollow" target=_blank href="http://www.facebook.com/<?=$data['social']['facebook']?>" title="Facebook"><i class="fa fa-facebook"></i></a>

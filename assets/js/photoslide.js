@@ -3,7 +3,7 @@
     var w             = window,
         d             = document,
         container,
-        defaultInterval = 5000,
+        defaultInterval = 3000,
         slideIndex    = 0,
         inlineStyle   = ".ps-slides {display:none;width:100%}"+
                         ".ps-dot {cursor:pointer;height:13px;width:13px;padding:0;background-color:#000;color:#fff;display:inline-block;text-align:center;border-radius:50%;border:1px solid #ccc!important;background-color:transparent!important;-webkit-transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s;transition:background-color .3s,color .15s,box-shadow .3s,opacity 0.3s}"+
@@ -105,9 +105,9 @@
                 dot.setAttribute("data-ps-index", i+1);
                 psContainer.appendChild(dot);
             }
-            
+
             psContent.appendChild(psContainer);
-            
+
             container.appendChild(psContent);
 
         }

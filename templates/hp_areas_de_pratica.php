@@ -33,7 +33,7 @@
             <div class="abc-card-2 abc-white">
                 <div class="abc-container">
                     <h5 style="min-height: 55px;"><?= $lang=='pt'?(utf8_decode($area['titulo'])):(utf8_decode($area['titulo_en'])) ?></h5>
-                    <div class="abc-justify" style="min-height: 200px;max-height: 200px;overflow: hidden"><?= $lang=='pt'?(utf8_decode($area['short_desc'])):(utf8_decode($area['short_desc_en'])) ?></div>
+                    <div class="abc-justify" style="min-height: 250px;max-height: 200px;overflow: hidden"><?= $lang=='pt'?(utf8_decode($area['short_desc'])):(utf8_decode($area['short_desc_en'])) ?></div>
                     <div class="abc-testemunho-botao">
                         <p>
                             <a href="/areas?id=<?=$area['id']?><?= $lang=='pt'?(''):('&lang=en') ?>">

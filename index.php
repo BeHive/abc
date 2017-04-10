@@ -91,7 +91,12 @@ $app->get('/','handleLang', function () use ($app, $menu, $social, $db) {
     $sth->execute();
     $blocos = $sth->fetchAll();
 
-    $app->render('homepage.php', array('lang'=>$globalLang,'blocos'=>$blocos[0],'menu' => $menu, 'social' => $social, 'db' => $db, 'areas' => $areas));
+    $sth = $db->prepare('SELECT * FROM blog order by date desc');
+    $sth->execute(array());
+    $blog = $sth->fetchAll();
+
+
+    $app->render('homepage.php', array('lang'=>$globalLang,'blocos'=>$blocos[0],'menu' => $menu, 'social' => $social, 'db' => $db, 'areas' => $areas, 'blog' => $blog));
     $db = null;
 });
 

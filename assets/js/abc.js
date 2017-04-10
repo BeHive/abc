@@ -5,14 +5,14 @@ Ink.requireModules([
     'Ink.Dom.FormSerialize_1',
     'Ink.Net.Ajax_1',
     'Ink.Dom.Css_1',
-    'Ink.Util.Array_1'
-], function (ILoaded, IElement, IEvent, IForm, IAjax, ICss, IArr) {
+    'Ink.UI.Animate_1'
+], function (ILoaded, IElement, IEvent, IForm, IAjax, ICss, IAnimate) {
 
     ILoaded.run(function () {
         Ink.routeAdd(['/$'], [], function () {
             Ink.log("homepage");
             PHOTOSLIDE.init({
-                interval: 2000,
+                interval: 5000,
                 targetElm: Ink.s("#photoslide"),
                 images: imageList
             });
@@ -24,12 +24,26 @@ Ink.requireModules([
                 if (parseInt(event.target.getAttribute("data-to")) < 0) {
                     target = Ink.ss("[data-index]").length - 1;
                 }
-                if (parseInt(event.target.getAttribute("data-to")) >= (Ink.ss("[data-index]").length)) {
+                if (parseInt(event.target.getAttribute("data-to")) >= (Ink.ss("[data-index]",event.target.closest(".abc-row").parentElement).length)) {
                     target = 0;
                 }
 
                 ICss.addClassName(event.target.parentElement.parentElement, "abc-hide");
-                ICss.removeClassName(Ink.s("[data-index='" + target + "']"), "abc-hide");
+                ICss.removeClassName(Ink.s("[data-index='" + target + "']",event.target.closest(".abc-row").parentElement), "abc-hide");
+
+            });
+            IEvent.observeMulti(Ink.ss(".abc-blog-chevron"), "click", function (event) {
+                var target = event.target.getAttribute("data-to");
+
+                if (parseInt(event.target.getAttribute("data-to")) < 0) {
+                    target = Ink.ss("[data-index]").length - 1;
+                }
+                if (parseInt(event.target.getAttribute("data-to")) >= (Ink.ss("[data-index]",event.target.closest(".abc-row").parentElement).length)) {
+                    target = 0;
+                }
+
+                ICss.addClassName(event.target.parentElement.parentElement, "abc-hide");
+                ICss.removeClassName(Ink.s("[data-index='" + target + "']",event.target.closest(".abc-row").parentElement), "abc-hide");
 
             });
         });
