@@ -53,10 +53,10 @@
 <body>
 
 <div id="header">
-    <div id="slider" style="max-height: 15em;">
-        <img src="assets/images/img_fjords_wide.jpg" />
-        <img src="assets/images/img_mountains_wide.jpg" />
-        <img src="assets/images/img_nature_wide.jpg" />
+    <div id="slider" style="height: 15em;">
+        <img src="assets/images/img_fjords_wide.jpg" style="object-fit: cover;"/>
+        <img src="assets/images/img_mountains_wide.jpg" style="object-fit: cover;"/>
+        <img src="assets/images/img_nature_wide.jpg" style="object-fit: cover;"/>
     </div>
     <div id="topBar">
         <span>pt</span>
@@ -156,7 +156,7 @@
 <div id="footer"></div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="index2stuff/jquery.slides.min.js"></script>
+<script src="index2stuff/jquery.slides.js"></script>
 
 
 <script language="JavaScript">
@@ -187,8 +187,7 @@
         communistSquares();
 
         $("#slider").slidesjs({
-            width: 500,
-            height: 200,
+            height: '15em',
             navigation: {
                 active: false,
                 effect: "slide"
