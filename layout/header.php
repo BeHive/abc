@@ -31,6 +31,9 @@
         <style>
             body { font: 400 1em Roboto, Arial, sans-serif;text-decoration: none; margin: 0}
             body * {margin: 0px}
+            a {text-decoration: none; text-transform: uppercase}
+            a, a:visited, a:active { color: inherit;}
+            a:hover {color:#2d2d2d}
             #topBar {text-align: right; background-color: rgba(0,0,0,0.5);color: #fff;
                 height: 2em;
                 position: absolute;
@@ -39,20 +42,20 @@
                 width: 100%;}
             #topBar>* {padding: 5px}
             #topBar i:last-of-type { margin-right: 2em;}
-            #menu {background-color: rgba(0,0,0,0.3);height: 13em;    position: absolute;background-repeat: no-repeat;background-image: url(assets/images/ABCLEGAL-transparente.png);
+            #menu {background-color: rgba(0,0,0,0.3);height: 28em;    position: absolute;background-repeat: no-repeat;background-image: url("/assets/images/ABCLEGAL-transparente.png");
                 top: 2em;
                 width: 100%;
                 z-index: 999;}
-            #menu a {text-decoration: none; font-weight: 100; font-size:1.5em}
-            #menu a, .sectionLink a:visited, .sectionLink a:hover, .sectionLink a:active { color: inherit;}
+            #menu a {font-weight: 100; font-size:1.5em}
             #menuItems {list-style-type: none; padding-left: 10px; color: #fff;padding-top: 3em; padding-right: 2em;}
             #menuItems li {list-style-type: none; float: right; padding-left: 2em; text-transform: capitalize;}
-            .section {text-align: center;margin:3em}
+            #menuItems li:hover{color:#2d2d2d}
+            .section {text-align: center;margin:3em; border-bottom-color: #4ebead;  border-bottom-width: 1px;  border-bottom-style: solid;padding-bottom: 1em;}
             .sectionTitle {font-weight: 100;font-size: 2em; text-transform: uppercase}
             .sectionBody {margin: 2em;}
             .sectionLink {color: #777777}
-            .sectionLink a {text-decoration: none; text-transform: lowercase}
-            .sectionLink a, .sectionLink a:visited, .sectionLink a:hover, .sectionLink a:active { color: inherit;}
+            .sectionLink a {padding-right: 20px;}
+            .sectionLink a:after { content: '\f054';font-family: FontAwesome;}
             .bigContent .sectionBody{font-weight: bold; font-size: 3em; margin: 0.5em;}
             @media (min-width:1101px){
                 .square{width: 25%;}
@@ -67,32 +70,30 @@
             .squareTitle{font-weight: 100;font-size: 1.5em; text-transform: uppercase}
             .squareBody {margin: 1em;text-align: center;}
             .squareLink {color: #fff;position: absolute;bottom: 20px;right: 20px;}
-            .squareLink a {text-decoration: none; text-transform: lowercase}
-            .squareLink a, .sectionLink a:visited, .sectionLink a:hover, .sectionLink a:active { color: inherit;}
-            .squareContent { height: 100%;padding: 20px;background-color: rgba(0,0,0,0.3);}
-            .squareContent:hover{background-color: rgba(0,0,0,0.5);}
+            .squareContent { height: 100%;padding: 20px;background-color: rgba(0,0,0,0.5);}
+            .squareContent:hover{background-color: rgba(0,0,0,0.7);}
         </style>
 
 	</head>
 	<body>
 
     <div id="header">
-        <div id="slider" style="height: 15em;">
+        <div id="slider" style="height: 30em;">
 
             <?
             $pictureList = json_decode($blocos["pictureList"]);
             foreach($pictureList as $k => $v){
                 ?>
-                <span style="height:15em;background-size: cover;background-image: url('<?=$v?>')"></span>
+                <span style="height:30em;background-size: cover;background-image: url('<?=$v?>')"></span>
                 <?
             }
             ?>
 
         </div>
         <div id="topBar">
-            <span>pt</span>
+            <span><a href="/?lang=pt">pt</a></span>
             <span>|</span>
-            <span>en</span>
+            <span><a href="/?lang=en">en</a></span>
             <i class="fa fa-facebook" aria-hidden="true"></i>
             <i class="fa fa-linkedin" aria-hidden="true"></i>
             <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -100,10 +101,11 @@
         </div>
         <div id="menu">
             <ul id="menuItems">
-                <li><a href="#">áreas de prática</a></li>
-                <li><a href="#">equipa</a></li>
-                <li><a href="#">comunicação</a></li>
-                <li><a href="#">recrutamento</a></li>
+                <?for($i = count($data['menu'])-1; $i >= 0; $i--){?>
+                    <li>
+                        <a href="<?=$data['menu'][$i]['link'] ?><?= $lang=='pt'?(''):('?lang=en') ?>"><?=$lang=='pt'?($data['menu'][$i]['text']):($data['menu'][$i]['text_en']) ?></a>
+                    </li>
+                <?}?>
             </ul>
         </div>
     </div>

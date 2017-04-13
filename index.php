@@ -52,7 +52,7 @@ $db = new PDO($dsn, $username, $password, $options);
 
 $app = new \Slim\Slim(array(
     'debug' => true,
-    'templates.path' => $_SERVER['DOCUMENT_ROOT'] . '\templates'
+    'templates.path' => $_SERVER['DOCUMENT_ROOT'] . '\layout'
 ));
 
 // GET route
