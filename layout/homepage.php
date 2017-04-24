@@ -18,8 +18,8 @@
                             <?= $lang == 'pt' ? (utf8_decode($area['short_desc'])) : (utf8_decode($area['short_desc_en'])) ?>
                         </div>
                         <span class="areaSquareLink"><a
-                                    href="/areas?id=<?= $area['id'] ?><?= $lang == 'pt' ? ('') : ('&lang=en') ?>">Saiba mais <i
-                                        class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
+                                    href="/areas?id=<?= $area['id'] ?><?= $lang == 'pt' ? ('') : ('&lang=en') ?>">
+                                <?= $lang == 'pt' ? ('Saiba mais') : ('Know more') ?> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
                     </div>
                 </div>
 
@@ -51,8 +51,8 @@
                         </div>
                         <span class="blogSquareDots"> . . . </span>
                         <span class="blogSquareLink"><a
-                                    href="/areas?id=<?= $entry['id'] ?><?= $lang == 'pt' ? ('') : ('&lang=en') ?>">Saiba mais <i
-                                        class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
+                                    href="/areas?id=<?= $entry['id'] ?><?= $lang == 'pt' ? ('') : ('&lang=en') ?>">
+                                <?= $lang == 'pt' ? ('Saiba mais') : ('Know more') ?> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
                     </div>
                 </div>
 
@@ -63,8 +63,7 @@
         </div>
     </div>
 
-
-    <div id="sociedade" class="section">
+    <div id="reuniao" class="section">
         <span class="sectionTitle"><?= $lang == 'pt' ? 'Agendamento de Reunião' : 'Schedule a Meeting' ?></span>
         <div class="sectionBody">
 

@@ -1,4 +1,72 @@
+<footer class="footer">
 
+
+<div class="contacts">
+        <div>
+            <div class="big"><?=$lang=='pt'?'Contactos':'Contacts'?></div>
+            <div class="" style="font-size: 10px;">
+                <p>
+                    ABC Legal – Sociedade de Advogados, RL<br>
+                <address>Avenida Conselheiro Fernando de Sousa 19 B-C<br>
+                    1070-072 Lisboa - Portugal</address>
+            </div>
+        </div>
+        <div>
+            <div class="big">
+                <span class="">&nbsp;</span>
+            </div>
+            <div class="" style="font-size: 10px">
+                <p>
+                    Tel. <a href="tel:+351213584480">+351 21 358 44 80</a><br>
+                    Fax.<a href="tel:+351213584489">+351 21 358 44 89</a>
+                    <a href="mailto:abclegal@abclegal.com.pt">abclegal@abclegal.com.pt</a>
+            </div>
+        </div>
+</div>
+        <div class="map">
+            <!-- Google Maps -->
+            <div id="googleMap" style="width:100%;height:160px;"></div>
+            <script src="http://maps.googleapis.com/maps/api/js"></script>
+            <script>
+                var myCenter = new google.maps.LatLng(38.7259378,-9.1610237);
+                function initialize() {
+                    var mapProp = {
+                        center: myCenter,
+                        zoom: 17,
+                        scrollwheel: false,
+                        draggable: false,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+                    var marker = new google.maps.Marker({
+                        position: myCenter,
+                    });
+                    marker.setMap(map);
+                }
+                google.maps.event.addDomListener(window, 'load', initialize);
+            </script>
+        </div>
+        <div class="social">
+            <div class="">
+                <h4><?=$lang=='pt'?'Siga-nos nas redes sociais':'Follow us on Social Media'?></h4>
+                <?if(isset($data['social']['facebook']) && $data['social']['facebook'] != ""){?>
+                    <a class="socialIcon" rel="nofollow" target=_blank href="http://www.facebook.com/<?=$data['social']['facebook']?>" title="Facebook"><i class="fa fa-facebook"></i></a>
+                <?}?>
+                <?if(isset($data['social']['twitter']) && $data['social']['twitter'] != ""){?>
+                    <a class="socialIcon" rel="nofollow" href="http://www.twitter.com/<?=$data['social']['twitter']?>" title="Twitter"><i class="fa fa-twitter"></i></a>
+                <?}?>
+                <?if(isset($data['social']['google']) && $data['social']['google'] != ""){?>
+                    <a class="socialIcon" rel="nofollow" href="https://plus.google.com/<?=$data['social']['google']?>" title="Google +"><i class="fa fa-google-plus"></i></a>
+                <?}?>
+                <?if(isset($data['social']['linkedin']) && $data['social']['linkedin'] != ""){?>
+                    <a class="socialIcon" rel="nofollow" target=_blank href="https://www.linkedin.com/company/<?=$data['social']['linkedin']?>" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+                <?}?>
+            </div>
+            <div class="">
+                <a class="disclaimer" href="/disclaimer<?=$lang=='pt'?'':'?lang=en'?>">disclaimer</a>
+            </div>
+        </div>
+</footer>
 
 		<script>
 	        function openMenu(evt, menuName) {
@@ -29,8 +97,8 @@
 
 
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="assets/js/jquery.slides.js"></script>
-        <script src="assets/js/abc-fe.js"></script>
+        <script src="/assets/js/jquery.slides.js"></script>
+        <script src="/assets/js/abc-fe.js"></script>
 
 
         </body>

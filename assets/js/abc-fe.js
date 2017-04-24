@@ -69,42 +69,73 @@ $(function () {
         squares.width((window.innerWidth / squaresPerRow) - 2);
     }
 
-    $(window).resize(function () {
+    $(".hamburger").click(function(){
+        $('body').toggleClass("hamburgerOn");
+    });
+
+    if($("#slider").length) {
+        $("#slider").slidesjs({
+            height: '17em',
+            navigation: {
+                active: false,
+                effect: "slide"
+            },
+            pagination: {
+                active: false
+            },
+            play: {
+                active: false,
+                // [boolean] Generate the play and stop buttons.
+                // You cannot use your own buttons. Sorry.
+                effect: "slide",
+                // [string] Can be either "slide" or "fade".
+                interval: 5000,
+                // [number] Time spent on each slide in milliseconds.
+                auto: true,
+                // [boolean] Start playing the slideshow on load.
+                swap: true,
+                // [boolean] show/hide stop and play buttons
+                pauseOnHover: false,
+                // [boolean] pause a playing slideshow on hover
+                restartDelay: 2500
+                // [number] restart delay on inactive slideshow
+            }
+        });
         communistAreaSquares();
         communistBlogSquares();
-    });
-
-    communistAreaSquares();
-    communistBlogSquares();
-
-    $("#slider").slidesjs({
-        height: '17em',
-        navigation: {
-            active: false,
-            effect: "slide"
-        },
-        pagination: {
-            active: false
-        },
-        play: {
-            active: false,
-            // [boolean] Generate the play and stop buttons.
-            // You cannot use your own buttons. Sorry.
-            effect: "slide",
-            // [string] Can be either "slide" or "fade".
-            interval: 5000,
-            // [number] Time spent on each slide in milliseconds.
-            auto: true,
-            // [boolean] Start playing the slideshow on load.
-            swap: true,
-            // [boolean] show/hide stop and play buttons
-            pauseOnHover: false,
-            // [boolean] pause a playing slideshow on hover
-            restartDelay: 2500
-            // [number] restart delay on inactive slideshow
-        }
-    });
-
+        $(window).resize(function () {
+            communistAreaSquares();
+            communistBlogSquares();
+        });
+    }
     addToHomescreen({modal: true, lifespan: 0, maxDisplayCount: 1});
+
+    $(".areasMenu").click(function (ev) {
+        var areaId = ev.target.closest("li").getAttribute("data-area-id");
+        $(".active").removeClass("active");
+        $("[data-area-id='"+areaId+"']").addClass("active");
+    });
+
+    $(".areasMobileMenu").click(function (ev) {
+        var areaId = ev.target.closest("li").getAttribute("data-area-id");
+        $(".active").removeClass("active");
+        $("[data-area-id='"+areaId+"']").addClass("active");
+        $('.areasMobileMenu').removeClass("areasBurgerOn");
+    });
+
+    if (window.location.search && !isNaN(parseInt(window.location.search.split('=')[1].split("&")[0]))) {
+        var areaId = window.location.search.split('=')[1].split("&")[0];
+        $(".active").removeClass("active");
+        $("[data-area-id='"+areaId+"']").addClass("active");
+    }
+
+    $(".areaBurger").click(function(){
+        $('.areasMobileMenu').toggleClass("areasBurgerOn");
+    });
+
+    /*
+    *
+    * $(".areaSquare").animate({ "left": "-="+($(".areaSquare").width()+2)+"px" }, "slow" )
+    * */
 
 });

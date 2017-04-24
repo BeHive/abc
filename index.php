@@ -84,7 +84,7 @@ $app->get('/','handleLang', function () use ($app, $menu, $social, $db) {
     $blog = $sth->fetchAll();
 
 
-    $app->render('homepage.php', array('lang'=>$globalLang,'blocos'=>$blocos[0],'menu' => $menu, 'social' => $social, 'db' => $db, 'areas' => $areas, 'blog' => $blog));
+    $app->render('homepage.php', array("section" => "homepage","sectionTitle"=>"Homepage",'lang'=>$globalLang,'blocos'=>$blocos[0],'menu' => $menu, 'social' => $social, 'db' => $db, 'areas' => $areas, 'blog' => $blog));
     $db = null;
 });
 
@@ -103,7 +103,7 @@ $app->get('/comunicacao', 'handleLang', function () use ($app, $menu, $social, $
     $sth->execute(array());
     $blog = $sth->fetchAll();
 
-    $app->render('comunicacao.php', array("blog" => $blog,'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
+    $app->render('comunicacao.php', array("section" => "comunicacao","sectionTitle"=>$globalLang == 'pt'?"comunicação":"communication","blog" => $blog,'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
     $db = null;
 })->name('comunicacao');
 
@@ -113,7 +113,7 @@ $app->get('/comunicacao/:id', 'handleLang', function ($id) use ($app, $menu, $so
     $sth->execute(array($id));
     $blog = $sth->fetchAll();
 
-    $app->render('post.php', array("blog" => $blog[0],'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
+    $app->render('post.php', array("section" => "comunicacao","sectionTitle"=>$globalLang == 'pt'?"comunicação":"communication","blog" => $blog[0],'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
     $db = null;
 })->name('comunicacaoPost');
 
@@ -123,7 +123,7 @@ $app->get('/areas','handleLang', function () use ($app, $menu, $social, $db) {
     $sth->execute(array());
     $areas = $sth->fetchAll();
 
-    $app->render('areas.php', array('lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'areas' => $areas));
+    $app->render('areas.php', array("section" => "areas","sectionTitle"=>$globalLang == 'pt'?"áreas de prática":"areas of expertise",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'areas' => $areas));
     $db = null;
 })->name('areas');
 
@@ -139,7 +139,7 @@ $app->get('/recrutamento','handleLang', function () use ($app, $menu, $social, $
     $sth->execute();
     $razoes = $sth->fetchAll();
 
-    $app->render('recrutamento.php', array('razoes'=>$razoes[0],'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db));
+    $app->render('recrutamento.php', array("section" => "recrutamento","sectionTitle"=>$globalLang == 'pt'?"procuramos valor":"we seek value",'razoes'=>$razoes[0],'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db));
     $db = null;
 })->name('recrutamento');
 
@@ -149,7 +149,7 @@ $app->get('/disclaimer','handleLang', function () use ($app, $menu, $social, $db
     $sth->execute(array());
     $disclaimer = $sth->fetchAll();
 
-    $app->render('disclaimer.php', array('lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'disclaimer' => $disclaimer[0]));
+    $app->render('disclaimer.php', array("section" => "disclaimer","sectionTitle"=>"disclaimer",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'disclaimer' => $disclaimer[0]));
     $db = null;
 })->name('disclaimer');
 
@@ -164,7 +164,7 @@ $app->get('/testemunhos/:id','handleLang', function ($id) use ($app, $menu, $soc
     $sth->execute(array($id));
     $testemunho = $sth->fetchAll();
 
-    $app->render('testemunho.php', array('lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'testemunho' => $testemunho[0]));
+    $app->render('testemunho.php', array("section" => "recrutamento","sectionTitle"=>$globalLang == 'pt'?"testemunhos":"testimonials",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'testemunho' => $testemunho[0]));
     $db = null;
 });
 
@@ -178,7 +178,7 @@ $app->get('/equipa','handleLang', function () use ($app, $menu, $social, $db) {
     $sth->execute();
     $positions = $sth->fetchAll();
 
-    $app->render('team.php', array('lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'positions' => $positions, 'team' => $team));
+    $app->render('team.php', array("section" => "equipa","sectionTitle"=>$globalLang == 'pt'?"equipa":"team",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'positions' => $positions, 'team' => $team));
     $db = null;
 });
 
@@ -193,7 +193,7 @@ $app->get('/equipa/:id','handleLang', function ($id) use ($app, $menu, $social, 
     $sth->execute(array($id));
     $team = $sth->fetchAll();
 
-    $app->render('teammember.php', array('lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'member' => $team[0]));
+    $app->render('teammember.php', array("section" => "equipa","sectionTitle"=>$globalLang == 'pt'?"equipa":"team",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'member' => $team[0]));
     $db = null;
 });
 

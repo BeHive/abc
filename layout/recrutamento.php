@@ -1,26 +1,53 @@
 	<? include "header.php" ?>
-	
-	<div>
-		<!-- Recrutamento -->
-		<div class="zoneLight">
-			<div class="abc-content abc-container">
-			<? include 'hp_recrutamento.php' ?>
-			</div>
-		</div>
-        <!-- Recrutamento -->
-        
-        <div class="zoneSplitter toDark">
-            <div class="left"></div>
-            <div class="right"></div>
+
+
+    <div id="valor" class="section">
+        <div class="sectionBody">
+            <?=$razoes['valor']?>
         </div>
-        
-		<!-- Testemunhos -->
-		<div class="zoneDark">
-			<div class="abc-content abc-container">
-			<? include 'hp_testemunhos.php' ?>
-			</div>
-		</div>
-        <!-- Testemunhos -->
-        
-	</div>
+        <i class="fa fa-envelope-o abc-text-teal abc-xlarge"></i>&nbsp;&nbsp;<a href="mailto:recrutamento@abclegal.com.pt">recrutamento@abclegal.com.pt</a>
+    </div>
+
+
+    <div id="reasons" class="section">
+        <span class="sectionTitle"><?=$lang=='pt'?'Porquê escolher a ABC LEGAL?':'Why choose ABC LEGAL'?></span>
+        <div class="sectionBody">
+            <?=$razoes['razoes']?>
+        </div>
+    </div>
+
+
+    <div id="testemunhos" class="section">
+        <span class="sectionTitle"><?=$lang=='pt'?'Testemunhos':'Testimonials'?></span>
+        <div class="sectionBody">
+
+
+            <?
+            $db = $data['db'];
+            $sth = $db->prepare('SELECT id,name,description,caption FROM testemunhos');
+            $sth->execute(array());
+            $testemunhos = $sth->fetchAll();
+
+            $first = true;
+            foreach($testemunhos as $value){
+?>
+
+                <div class="personCard">
+                    <div class="personPicture" style="background-image: url('/image/testemunhos/<?=$value['id']?>')"></div>
+                    <div class="sectionTitle"><?=utf8_decode($value['name'])?></div>
+                    <div class="sectionBody"><?=utf8_decode($value['description'])?></div>
+                    <span class="sectionLink"><a href="/testemunhos/<?=$value['id']?>"><?=$lang=='pt'?'Ver mais':'Read more'?> </a></span>
+                </div>
+
+            <?}?>
+
+
+
+        </div>
+    </div>
+
+
+
+
+    <!-- Testemunhos -->
 	<? include "footer.php" ?>

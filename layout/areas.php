@@ -1,36 +1,41 @@
-	<? include "header.php" ?>
+<? include "header.php" ?>
 
-		<div class="zoneLight">
-			<div class="abc-content abc-container">
+    <div class="areasDePratica">
+        <div class="areasMobileMenu">
+            <a class="areaBurger"><i class="fa fa-bars" aria-hidden="true"></i></a>
+            <ul>
+                <? $first = true; ?>
+                <? foreach ($areas as $area) { ?>
+                    <li data-area-id="<?= $area['id'] ?>" <? if ($first){$first = false; ?>class="active"<? } ?>>
+                        <?= $lang == 'pt' ? (utf8_decode($area['titulo'])) : (utf8_decode($area['titulo_en'])) ?>
+                    </li>
 
-                <div class="abc-center abc-padding-64">
-                    <span class="abc-xlarge abc-bottombar abc-border-dark-grey abc-padding-16">
-                        <?=$lang=='pt'?('As nossas Áreas de Prática'):('Our Areas of Expertise')?>
+                <? } ?>
+            </ul>
+        </div>
+        <div class="areasMenu">
+            <ul>
+                <? $first = true; ?>
+                <? foreach ($areas as $area) { ?>
+                    <li data-area-id="<?= $area['id'] ?>" <? if ($first){$first = false; ?>class="active"<? } ?>>
+                        <?= $lang == 'pt' ? (utf8_decode($area['titulo'])) : (utf8_decode($area['titulo_en'])) ?>
+                    </li>
 
-                    </span>
-                </div>
+                <? } ?>
+            </ul>
 
-                <div class="abc-left-align abc-col m2 abc-padding-right" id="areasMenu">
-
-                    <?foreach ($areas as $area) {?>
-                        <span style="cursor: pointer;" data-area-id="<?=$area['id']?>">
-                            <h6><?=$lang=='pt'?(utf8_decode($area['titulo'])):(utf8_decode($area['titulo_en']))?></h6>
-                        </span>
-                    <?}?>
-
-
-                </div>
-                <div class="abc-justify abc-col m10 abc-padding-left" id="areasDescription">
-
-                <?foreach ($areas as $area) {?>
-                    <div class="abc-hide" data-area-id="<?=$area['id']?>">
-                        <h2><?=$lang=='pt'?(utf8_decode($area['titulo'])):(utf8_decode($area['titulo_en']))?></h2>
-                        <?=$lang=='pt'?(utf8_decode($area['description'])):(utf8_decode($area['description_en']))?>
+        </div>
+        <div class="areasList">
+            <? $first = true; ?>
+            <? foreach ($areas as $area) { ?>
+                <div data-area-id="<?= $area['id'] ?>" class="section <? if ($first) {$first = false; ?>active<? } ?>" style="display:none">
+                    <span class="sectionTitle"><?= $lang == 'pt' ? (utf8_decode($area['titulo'])) : (utf8_decode($area['titulo_en'])) ?></span>
+                    <div class="sectionBody">
+                        <?= $lang == 'pt' ? (utf8_decode($area['description'])) : (utf8_decode($area['description_en'])) ?>
                     </div>
-                <?}?>
-
                 </div>
+            <? } ?>
+        </div>
 
-            </div>
-		</div>
-	<? include "footer.php" ?>
+    </div>
+<? include "footer.php" ?>

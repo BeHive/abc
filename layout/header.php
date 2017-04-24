@@ -33,6 +33,7 @@
 	<body>
 
     <div id="header">
+        <?if($section == "homepage"){?>
         <div id="slider" style="height: 17em;">
 
             <?
@@ -45,16 +46,46 @@
             ?>
 
         </div>
+        <?}else{?>
+            <div style="height:17em;background-size: cover;background-image: url('/assets/images/headers/<?=$section?>.jpg')"></span>
+
+            </div>
+        <?}?>
         <div id="topBar">
-            <span><a href="/?lang=pt">pt</a></span>
+            <a href="/?lang=pt">pt</a>
             <span>|</span>
-            <span><a href="/?lang=en">en</a></span>
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-            <i class="fa fa-linkedin" aria-hidden="true"></i>
-            <i class="fa fa-envelope-o" aria-hidden="true"></i>
-            <i class="fa fa-search" aria-hidden="true"></i>
+            <a href="/?lang=en">en</a>
+
+            <?if(isset($data['social']['facebook']) && $data['social']['facebook'] != ""){?>
+                <a rel="nofollow" target=_blank href="http://www.facebook.com/<?=$data['social']['facebook']?>" title="Facebook"><i class="fa fa-facebook"></i></a>
+            <?}?>
+            <?if(isset($data['social']['twitter']) && $data['social']['twitter'] != ""){?>
+                <a rel="nofollow" href="http://www.twitter.com/<?=$data['social']['twitter']?>" title="Twitter"><i class="fa fa-twitter"></i></a>
+            <?}?>
+            <?if(isset($data['social']['google']) && $data['social']['google'] != ""){?>
+                <a rel="nofollow" href="https://plus.google.com/<?=$data['social']['google']?>" title="Google +"><i class="fa fa-google-plus"></i></a>
+            <?}?>
+            <?if(isset($data['social']['linkedin']) && $data['social']['linkedin'] != ""){?>
+                <a rel="nofollow" target=_blank href="https://www.linkedin.com/company/<?=$data['social']['linkedin']?>" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+            <?}?>
+            <a href="mailto:abclegal@abclegal.com.pt"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+
+            <a href="/<?= $lang == 'pt' ? ('') : ('?lang=en') ?>"><i class="fa fa-home" aria-hidden="true"></i></a>
+
+
+            <!--<i class="fa fa-search" aria-hidden="true"></i>-->
+
+
+
+
+
+
+
         </div>
         <div id="menu">
+            <?if($section != "homepage"){?>
+            <div class="pageTitle"><?=$sectionTitle?></div>
+            <?}?>
             <ul id="menuItems">
                 <?for($i = count($data['menu'])-1; $i >= 0; $i--){?>
                     <li>
@@ -62,5 +93,15 @@
                     </li>
                 <?}?>
             </ul>
+            <a class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></a>
         </div>
+    </div>
+    <div class="mobileMenu">
+        <ul>
+            <?for($i = 0; $i < count($data['menu']); $i++){?>
+                <li>
+                    <a href="<?=$data['menu'][$i]['link'] ?><?= $lang=='pt'?(''):('?lang=en') ?>"><?=$lang=='pt'?($data['menu'][$i]['text']):($data['menu'][$i]['text_en']) ?></a>
+                </li>
+            <?}?>
+        </ul>
     </div>
