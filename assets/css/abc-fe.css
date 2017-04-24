@@ -1,0 +1,71 @@
+body { font: 400 1em Roboto, Arial, sans-serif;text-decoration: none; margin: 0}
+body * {margin: 0px}
+a {text-decoration: none; text-transform: uppercase}
+a, a:visited, a:active { color: inherit;}
+a:hover {color:#2d2d2d}
+#topBar {text-align: right; background-color: rgba(0,0,0,0.5);color: #fff;
+    height: 2em;
+    position: absolute;
+    z-index: 99999999;
+    top: 0px;
+    width: 100%;}
+#topBar>* {padding: 5px}
+#topBar i:last-of-type { margin-right: 2em;}
+#menu {background-color: rgba(0,0,0,0.3);height:15em;    position: absolute;background-repeat: no-repeat;background-image: url("/assets/images/ABCLEGAL-transparente.png");
+    top: 2em;
+    width: 100%;
+    z-index: 999;}
+#menu a {font-weight: 100; font-size:1.5em}
+#menuItems {list-style-type: none; padding-left: 10px; color: #fff;padding-top: 3em; padding-right: 2em;}
+#menuItems li {list-style-type: none; float: right; padding-left: 2em; text-transform: capitalize;}
+#menuItems li:hover{color:#2d2d2d}
+.section {text-align: center;margin:3em; border-bottom-color: #4ebead;padding-bottom: 1em;}
+.sectionTitle {font-weight: 100;font-size: 2em; text-transform: uppercase;border-bottom-color: #4ebead;  border-bottom-width: 1px;  border-bottom-style: solid;}
+
+
+@media (min-width:580px){
+    .sectionTitle {padding-left: 1em;padding-right: 1em;}
+}
+
+
+
+.sectionBody {margin: 2em;}
+.sectionLink {color: #777777}
+.sectionLink a {padding-right: 20px;}
+.sectionLink a:after { content: '\f054';font-family: FontAwesome;}
+.bigContent .sectionBody{font-weight: bold; font-size: 3em; margin: 0.5em;}
+
+@media (min-width:1101px){
+    .areaSquare{width: 25%;}
+    .blogSquare{width: 25%;}
+}
+@media (max-width:1100px){
+    .areaSquare{width: 50%;}
+    .blogSquare{width: 50%;}
+}
+@media (max-width:600px){
+    .areaSquare{width: 100%;}
+    .blogSquare{width: 100%;}
+}
+.areaSquare,.blogSquare{color:#fff;float: left;border-color: #fff;border-width: 1px;box-sizing: border-box;border-style: solid;position: relative}
+.areaSquareTitle,.blogSquareTitle{font-weight: 100;font-size: 1.5em; text-transform: uppercase;}
+.areaSquareBody{margin: 1em;text-align: center;}
+.blogSquareBody{line-height: 1em;max-height: 10em;overflow: hidden;margin-top: 1em;margin-bottom: 2em;}
+.areaSquareLink,.blogSquareLink {color: #fff;position: absolute;bottom: 20px;right: 20px;}
+.areaSquareContent,.blogSquareContent { height: 100%;padding: 20px;background-color: rgba(0,0,0,0.5);}
+.areaSquareContent:hover,.blogSquareContent:hover{background-color: rgba(0,0,0,0.7);}
+.blogSquareDots{ text-align: center;width: 100%;position: absolute;bottom: 2.5em;}
+
+
+#abcReuniao{margin-left: 20%;margin-right: 20%;}
+@media (max-width:750px){
+    #abcReuniao{margin-left: 0%;margin-right: 0%;}
+}
+#abcReuniao>* {width: 100%;margin-bottom:2em}
+#abcReuniao>input{ border-bottom: black;border-bottom-width: 1px;border-bottom-style: solid;border-left: none;border-top: none;border-right: none;border-bottom-color: #4ebead;font-weight: 400;font-stretch: normal;font-size: 1em;}
+#abcReuniao>a{color:#777777;cursor:pointer}
+
+.message {width: 100%;border-width: 2px;border-style: solid;margin: 1em;padding-bottom: 1em;padding-top: 1em;}
+.message.green{background-color: lightgreen;border-color: darkseagreen;}
+.message.red{background-color: lightcoral;border-color: darkred;}
+.message i{position: absolute;right: 3em;}

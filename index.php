@@ -56,18 +56,6 @@ $app = new \Slim\Slim(array(
 ));
 
 // GET route
-
-$app->post("/reuniao",'handleLang', function () use ($app, $db) {
-    $data = json_decode($app->request->post('data'), true);
-    $name = utf8_encode($data['name']);
-    $email = utf8_encode($data['email']);
-    $body = utf8_encode($data['body']);
-
-    $sth = $db->prepare('INSERT INTO mensagens (name,email,body,date) VALUES (?,?,?,?)');
-    $sth->execute(array($name, $email, $body, date("Y-m-d H:i:s")));
-
-});
-
 $app->get('/','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
 
@@ -98,6 +86,15 @@ $app->get('/','handleLang', function () use ($app, $menu, $social, $db) {
 
     $app->render('homepage.php', array('lang'=>$globalLang,'blocos'=>$blocos[0],'menu' => $menu, 'social' => $social, 'db' => $db, 'areas' => $areas, 'blog' => $blog));
     $db = null;
+});
+
+$app->post("/reuniao",'handleLang', function () use ($app, $db) {
+    $name = utf8_encode($app->request->post('name'));
+    $email = utf8_encode($app->request->post('email'));
+    $body = utf8_encode($app->request->post('body'));
+
+    $sth = $db->prepare('INSERT INTO mensagens (name,email,body,date) VALUES (?,?,?,?)');
+    $sth->execute(array($name, $email, $body, date("Y-m-d H:i:s")));
 });
 
 $app->get('/comunicacao', 'handleLang', function () use ($app, $menu, $social, $db) {
@@ -940,15 +937,5 @@ $app->group('/admin', function () use ($app, $db) {
     })->name('logout');
 
 });
-
-
-// POST route
-$app->post(
-    '/post',
-    function () {
-        echo 'This is a POST route';
-    }
-);
-
 
 $app->run();
