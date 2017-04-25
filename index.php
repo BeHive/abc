@@ -6,6 +6,13 @@ require_once 'vendor/Slim/Slim.php';
 require_once 'vendor/Spyc/Spyc.php';
 //require_once 'vendor/Mail/Mail.php';
 
+function my_json_encode($arr)
+{
+    array_walk_recursive($arr, function (&$item, $key) { if (is_string($item)) $item = mb_encode_numericentity($item, array (0x80, 0xffff, 0, 0xffff), 'UTF-8'); });
+    return mb_decode_numericentity(json_encode($arr), array (0x80, 0xffff, 0, 0xffff), 'UTF-8');
+
+}
+
 $globalLang = 'pt';
 function handleSession()
 {
@@ -169,16 +176,27 @@ $app->get('/testemunhos/:id','handleLang', function ($id) use ($app, $menu, $soc
 });
 
 $app->get('/equipa','handleLang', function () use ($app, $menu, $social, $db) {
+
     global $globalLang;
-    $sth = $db->prepare('SELECT * FROM team');
+    if($globalLang == 'pt') {
+        $sth = $db->prepare('SELECT t.id, t.name, p.name as position FROM team t inner join positions p on p.id = t.position');
+    }
+    else {
+        $sth = $db->prepare('SELECT t.id, t.name, p.name_en as position FROM team t inner join positions p on p.id = t.position');
+    }
+
     $sth->execute();
     $team = $sth->fetchAll();
 
-    $sth = $db->prepare('SELECT * FROM positions order by sort');
-    $sth->execute();
-    $positions = $sth->fetchAll();
+    foreach ($team as $k => $v){
+        $team[$k]['name'] = utf8_decode($v['name']);
+        //$team[$k]['position'] = utf8_decode($v['position']);
+        unset($team[$k][0]);
+        unset($team[$k][1]);
+        unset($team[$k][2]);
+    }
 
-    $app->render('team.php', array("section" => "equipa","sectionTitle"=>$globalLang == 'pt'?"equipa":"team",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'positions' => $positions, 'team' => $team));
+    $app->render('team.php', array("section" => "equipa","sectionTitle"=>$globalLang == 'pt'?"equipa":"team",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'team' => $team));
     $db = null;
 });
 
@@ -317,7 +335,7 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->render('admin\\recrutamento.php', array("user" => $user[0], "data" => $data[0]));
         $db = null;
-    })->name('recrutamento');
+    })->name('recrutamentoRead');
 
     $app->post('/recrutamento', 'handleSession', function () use ($app, $db) {
 
@@ -350,7 +368,7 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->render('admin\\disclaimer.php', array("user" => $user[0], "disclaimer" => $disclaimer[0]));
         $db = null;
-    })->name('disclaimer');
+    })->name('disclaimerRead');
 
     $app->post('/disclaimer', 'handleSession', function () use ($app, $db) {
 
@@ -752,7 +770,7 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->render('admin\\areas.php', array("user" => $user[0], "areas" => $areas));
         $db = null;
-    })->name('areas');
+    })->name('areasRead');
 
     $app->get('/areas/edit/:id', 'handleSession', function ($id) use ($app, $db) {
         $sth = $db->prepare('SELECT * FROM admins where id = ?');

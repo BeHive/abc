@@ -3,8 +3,8 @@
 
 <?= utf8_decode($blocos['sociedade']) ?>
 
-    <div id="areasOuterContainer" style="overflow-x: hidden">
-        <div id="areasInnerContainer">
+    <div id="areasOuterContainer">
+        <div id="areasInnerContainer" style="display: none">
             <?
             $counter = 0;
             foreach ($areas as $area) {
