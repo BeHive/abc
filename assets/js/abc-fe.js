@@ -180,7 +180,6 @@ $(function () {
     );
 
     function scrollAreas() {
-        console.log(shouldScroll);
         if (shouldScroll) {
 
             var operation = "-=";
