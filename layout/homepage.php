@@ -51,7 +51,7 @@
                         </div>
                         <span class="blogSquareDots"> . . . </span>
                         <span class="blogSquareLink"><a
-                                    href="/areas?id=<?= $entry['id'] ?><?= $lang == 'pt' ? ('') : ('&lang=en') ?>">
+                                    href="/comunicacao/<?= $entry['id'] ?><?= $lang == 'pt' ? ('') : ('?lang=en') ?>">
                                 <?= $lang == 'pt' ? ('Saiba mais') : ('Know more') ?> <i class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
                     </div>
                 </div>
