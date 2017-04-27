@@ -26,7 +26,7 @@
         <div class="map">
             <!-- Google Maps -->
             <div id="googleMap" style="width:100%;height:160px;"></div>
-            <script src="http://maps.googleapis.com/maps/api/js"></script>
+            <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0jsnxAwcFb9lRN6NOMnskdxpWdkFCQqc"></script>
             <script>
                 var myCenter = new google.maps.LatLng(38.7259378,-9.1610237);
                 function initialize() {
