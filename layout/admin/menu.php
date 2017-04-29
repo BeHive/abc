@@ -15,6 +15,7 @@
 
     <a data-menu="dashboard" href="/admin/dashboard" class="abc-padding abc-blue"><i class="fa fa-tachometer fa-fw"></i>&nbsp;Dashboard</a>
     <a data-menu="homepage" href="/admin/homepage" class="abc-padding"><i class="fa fa-home fa-fw"></i>&nbsp;Homepage</a>
+    <a data-menu="sociedade" href="/admin/sociedade" class="abc-padding"><i class="fa fa-university  fa-fw"></i>&nbsp; Sociedade</a>
     <a data-menu="areaspratica" href="/admin/areas" class="abc-padding"><i class="fa fa-balance-scale  fa-fw"></i>&nbsp; Áreas de Prática</a>
     <a data-menu="equipa" href="/admin/team" class="abc-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Equipa</a>
     <a data-menu="blog" href="/admin/blog" class="abc-padding"><i class="fa fa-pencil fa-fw"></i>&nbsp; Blog</a>

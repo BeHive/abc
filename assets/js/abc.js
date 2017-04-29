@@ -191,6 +191,20 @@ Ink.requireModules([
 
         Ink.routeAdd(['/admin/team'], [], function () {
             setMenu("equipa");
+            tinymce.init({
+                selector: "#item-text",
+                height: 300,
+                plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste code"],
+                readonly: 0,
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+            tinymce.init({
+                selector: "#item-text_en",
+                height: 300,
+                plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste code"],
+                readonly: 0,
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
         });
 
         Ink.routeAdd(['/admin/areas'], [], function () {
@@ -270,6 +284,46 @@ Ink.requireModules([
                 readonly: 0,
                 toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
             });
+            tinymce.init({
+                selector: "#item-description",
+                height: 300,
+                plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste code"],
+                readonly: 0,
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+            tinymce.init({
+                selector: "#item-description_en",
+                height: 300,
+                plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste code"],
+                readonly: 0,
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+
+        });
+
+        Ink.routeAdd(['/admin/sociedade'], [], function () {
+            setMenu("sociedade");
+        });
+
+        Ink.routeAdd(['/admin/sociedade/add'], [], function () {
+            tinymce.init({
+                selector: "#item-description",
+                height: 300,
+                plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste code"],
+                readonly: 0,
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+            tinymce.init({
+                selector: "#item-description_en",
+                height: 300,
+                plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste code"],
+                readonly: 0,
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+
+        });
+
+        Ink.routeAdd(['/admin/sociedade/edit'], [], function () {
             tinymce.init({
                 selector: "#item-description",
                 height: 300,

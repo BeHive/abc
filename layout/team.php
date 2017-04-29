@@ -7,6 +7,9 @@
         </div>
     </div>
 
+
+<?= $teamDisclaimer['text'] ?>
+
     <div class="section">
         <span class="sectionTitle"><?= $lang == 'pt' ? 'EQUIPA' : 'TEAM' ?></span>
         <div class="sectionBody">

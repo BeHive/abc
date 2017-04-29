@@ -134,6 +134,16 @@ $app->get('/areas','handleLang', function () use ($app, $menu, $social, $db) {
     $db = null;
 })->name('areas');
 
+$app->get('/sociedade','handleLang', function () use ($app, $menu, $social, $db) {
+    global $globalLang;
+    $sth = $db->prepare('SELECT * FROM sociedade');
+    $sth->execute(array());
+    $blocos = $sth->fetchAll();
+
+    $app->render('sociedade.php', array("section" => "areas","sectionTitle"=>$globalLang == 'pt'?"sociedade":"the firm",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'blocos' => $blocos));
+    $db = null;
+})->name('sociedade');
+
 $app->get('/recrutamento','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
     if($globalLang == 'pt'){
@@ -152,8 +162,8 @@ $app->get('/recrutamento','handleLang', function () use ($app, $menu, $social, $
 
 $app->get('/disclaimer','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
-    $sth = $db->prepare('SELECT * FROM disclaimers');
-    $sth->execute(array());
+    $sth = $db->prepare('SELECT * FROM disclaimers where type = ?');
+    $sth->execute(array('disclaimer'));
     $disclaimer = $sth->fetchAll();
 
     $app->render('disclaimer.php', array("section" => "disclaimer","sectionTitle"=>"disclaimer",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db, 'disclaimer' => $disclaimer[0]));
@@ -188,6 +198,15 @@ $app->get('/equipa','handleLang', function () use ($app, $menu, $social, $db) {
     $sth->execute();
     $team = $sth->fetchAll();
 
+    if($globalLang == 'pt') {
+        $sth = $db->prepare('SELECT text FROM disclaimers where type = ?');
+    }
+    else {
+        $sth = $db->prepare('SELECT text_en as text FROM disclaimers where type = ?');
+    }
+    $sth->execute(array('team'));
+    $teamDisclaimer = $sth->fetchAll();
+
     foreach ($team as $k => $v){
         $team[$k]['name'] = utf8_decode($v['name']);
         //$team[$k]['position'] = utf8_decode($v['position']);
@@ -196,7 +215,7 @@ $app->get('/equipa','handleLang', function () use ($app, $menu, $social, $db) {
         unset($team[$k][2]);
     }
 
-    $app->render('team.php', array("section" => "equipa","sectionTitle"=>$globalLang == 'pt'?"equipa":"team",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'team' => $team));
+    $app->render('team.php', array("section" => "equipa","sectionTitle"=>$globalLang == 'pt'?"equipa":"team",'lang'=>$globalLang,'menu' => $menu, 'teamDisclaimer' => $teamDisclaimer[0], 'social' => $social, 'team' => $team));
     $db = null;
 });
 
@@ -362,8 +381,8 @@ $app->group('/admin', function () use ($app, $db) {
         $sth->execute(array($_SESSION["currentUser"]));
         $user = $sth->fetchAll();
 
-        $sth = $db->prepare('SELECT * FROM disclaimers');
-        $sth->execute(array());
+        $sth = $db->prepare('SELECT * FROM disclaimers where type = ?');
+        $sth->execute(array('disclaimer'));
         $disclaimer = $sth->fetchAll();
 
         $app->render('admin\\disclaimer.php', array("user" => $user[0], "disclaimer" => $disclaimer[0]));
@@ -372,13 +391,12 @@ $app->group('/admin', function () use ($app, $db) {
 
     $app->post('/disclaimer', 'handleSession', function () use ($app, $db) {
 
-        utf8_encode($app->request->post('fileToUpload'));
         try {
             $text = utf8_encode($app->request->post('text'));
             $text_en = utf8_encode($app->request->post('text_en'));
 
-            $sth = $db->prepare('UPDATE disclaimers set text = ? ,text_en = ?');
-            $sth->execute(array($text, $text_en));
+            $sth = $db->prepare('UPDATE disclaimers set text = ? ,text_en = ? where type = ?');
+            $sth->execute(array($text, $text_en,'disclaimer'));
 
             flash('green', "Disclaimer alterado com sucesso");
         } catch (Exception $e) {
@@ -403,9 +421,31 @@ $app->group('/admin', function () use ($app, $db) {
         $sth->execute(array());
         $positions = $sth->fetchAll();
 
-        $app->render('admin\\team.php', array("user" => $user[0], "team" => $team, 'positions' => $positions));
+        $sth = $db->prepare('SELECT * FROM disclaimers where type = ?');
+        $sth->execute(array('team'));
+        $teamDisclaimer = $sth->fetchAll();
+
+        $app->render('admin\\team.php', array("user" => $user[0], "teamDisclaimer" => $teamDisclaimer[0],"team" => $team, 'positions' => $positions));
         $db = null;
     })->name('team');
+
+    $app->post('/team', 'handleSession', function () use ($app, $db) {
+
+        try {
+            $text = utf8_encode($app->request->post('text'));
+            $text_en = utf8_encode($app->request->post('text_en'));
+
+            $sth = $db->prepare('UPDATE disclaimers set text = ? ,text_en = ? where type = ?');
+            $sth->execute(array($text, $text_en,'team'));
+
+            flash('green', "Texto alterado com sucesso");
+        } catch (Exception $e) {
+            flash('red', "Ocorreu um erro. Por favor tente novamente");
+        }
+
+        $app->redirect('/admin/team');
+
+    })->name('teamSave');
 
     $app->get('/team/edit/:id', 'handleSession', function ($id) use ($app, $db) {
         $sth = $db->prepare('SELECT * FROM admins where id = ?');
@@ -816,7 +856,7 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->render('admin\\areasAdd.php', array("user" => $user[0]));
         $db = null;
-    })->name('areasAdd');
+    })->name('sociedadeAdd');
 
     $app->post('/areas/add', 'handleSession', function () use ($app, $db) {
         try {
@@ -838,7 +878,7 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->redirect('/admin/areas');
 
-    })->name('areasAddSave');
+    })->name('sociedadeAddSave');
 
     $app->post('/areas/delete', 'handleSession', function () use ($app, $db) {
 
@@ -855,7 +895,101 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->redirect('/admin/areas');
 
-    })->name('areasDelete');
+    })->name('sociedadeDelete');
+
+    $app->get('/sociedade', 'handleSession', function () use ($app, $db) {
+        $sth = $db->prepare('SELECT * FROM admins where id = ?');
+        $sth->execute(array($_SESSION["currentUser"]));
+        $user = $sth->fetchAll();
+
+        $sth = $db->prepare('SELECT * FROM sociedade');
+        $sth->execute(array());
+        $sociedade = $sth->fetchAll();
+
+        $app->render('admin\\sociedade.php', array("user" => $user[0], "sociedades" => $sociedade));
+        $db = null;
+    })->name('sociedadeRead');
+
+    $app->get('/sociedade/edit/:id', 'handleSession', function ($id) use ($app, $db) {
+        $sth = $db->prepare('SELECT * FROM admins where id = ?');
+        $sth->execute(array($_SESSION["currentUser"]));
+        $user = $sth->fetchAll();
+
+        $sth = $db->prepare('SELECT * FROM sociedade where id = ?');
+        $sth->execute(array($id));
+        $sociedade = $sth->fetchAll();
+
+        $app->render('admin\sociedadeEdit.php', array("user" => $user[0], "sociedade" => $sociedade[0]));
+        $db = null;
+    })->name('sociedadeEdit');
+
+    $app->post('/sociedade/edit/:id', 'handleSession', function ($id) use ($app, $db) {
+
+        try {
+            $title = utf8_encode($app->request->post('title'));
+            $title_en = utf8_encode($app->request->post('title_en'));
+
+            $description = utf8_encode($app->request->post('description'));
+            $description_en = utf8_encode($app->request->post('description_en'));
+
+
+            $sth = $db->prepare('UPDATE sociedade set titulo = ? ,titulo_en = ? ,description = ? ,description_en = ? where id = ? ');
+            $sth->execute(array($title, $title_en, $description, $description_en, $id));
+
+            flash('green', "bloco alterado com sucesso");
+        } catch (Exception $e) {
+            flash('red', "Ocorreu um erro. Por favor tente novamente");
+        }
+
+        $app->redirect('/admin/sociedade');
+
+    })->name('sociedadeEditSave');
+
+    $app->get('/sociedade/add', 'handleSession', function () use ($app, $db) {
+        $sth = $db->prepare('SELECT * FROM admins where id = ?');
+        $sth->execute(array($_SESSION["currentUser"]));
+        $user = $sth->fetchAll();
+
+        $app->render('admin\\sociedadeAdd.php', array("user" => $user[0]));
+        $db = null;
+    })->name('sociedadeAdd');
+
+    $app->post('/sociedade/add', 'handleSession', function () use ($app, $db) {
+        try {
+            $title = utf8_encode($app->request->post('title'));
+            $title_en = utf8_encode($app->request->post('title_en'));
+
+            $description = utf8_encode($app->request->post('description'));
+            $description_en = utf8_encode($app->request->post('description_en'));
+
+            $sth = $db->prepare('insert into sociedade (titulo,titulo_en,description,description_en) VALUES (?,?,?,?)');
+            $sth->execute(array($title, $title_en, $description, $description_en));
+
+            flash('green', "Bloco adicionado com sucesso");
+        } catch (Exception $e) {
+            flash('red', "Ocorreu um erro. Por favor tente novamente");
+        }
+
+        $app->redirect('/admin/sociedade');
+
+    })->name('sociedadeAddSave');
+
+    $app->post('/sociedade/delete', 'handleSession', function () use ($app, $db) {
+
+        try {
+            $area = utf8_encode($app->request->post('areaId'));
+
+            $sth = $db->prepare('delete from sociedade where id = ?');
+            $sth->execute(array($area));
+
+            flash('green', "Bloco removido com sucesso");
+        } catch (Exception $e) {
+            flash('red', "Ocorreu um erro. Por favor tente novamente");
+        }
+
+        $app->redirect('/admin/sociedade');
+
+    })->name('sociedadeDelete');
 
     $app->get('/blog', 'handleSession', function () use ($app, $db) {
         $sth = $db->prepare('SELECT * FROM admins where id = ?');
