@@ -62,7 +62,7 @@ $app = new \Slim\Slim(array(
     'templates.path' => $_SERVER['DOCUMENT_ROOT'] . '\layout'
 ));
 
-// GET route
+//homepage
 $app->get('/','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
 
@@ -95,6 +95,7 @@ $app->get('/','handleLang', function () use ($app, $menu, $social, $db) {
     $db = null;
 });
 
+//reuniao
 $app->post("/reuniao",'handleLang', function () use ($app, $db) {
     $name = utf8_encode($app->request->post('name'));
     $email = utf8_encode($app->request->post('email'));
@@ -104,8 +105,10 @@ $app->post("/reuniao",'handleLang', function () use ($app, $db) {
     $sth->execute(array($name, $email, $body, date("Y-m-d H:i:s")));
 });
 
+//comunicacao
 $app->get('/comunicacao', 'handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
+
     $sth = $db->prepare('SELECT * FROM blog order by date desc');
     $sth->execute(array());
     $blog = $sth->fetchAll();
@@ -114,6 +117,7 @@ $app->get('/comunicacao', 'handleLang', function () use ($app, $menu, $social, $
     $db = null;
 })->name('comunicacao');
 
+//comunicacao/id
 $app->get('/comunicacao/:id', 'handleLang', function ($id) use ($app, $menu, $social, $db) {
     global $globalLang;
     $sth = $db->prepare('SELECT * FROM blog where id = ?');
@@ -124,6 +128,7 @@ $app->get('/comunicacao/:id', 'handleLang', function ($id) use ($app, $menu, $so
     $db = null;
 })->name('comunicacaoPost');
 
+//areas
 $app->get('/areas','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
     $sth = $db->prepare('SELECT * FROM areas_pratica');
@@ -134,6 +139,7 @@ $app->get('/areas','handleLang', function () use ($app, $menu, $social, $db) {
     $db = null;
 })->name('areas');
 
+//sociedade
 $app->get('/sociedade','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
     $sth = $db->prepare('SELECT * FROM sociedade');
@@ -144,6 +150,7 @@ $app->get('/sociedade','handleLang', function () use ($app, $menu, $social, $db)
     $db = null;
 })->name('sociedade');
 
+//recrutamento
 $app->get('/recrutamento','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
     if($globalLang == 'pt'){
@@ -160,6 +167,7 @@ $app->get('/recrutamento','handleLang', function () use ($app, $menu, $social, $
     $db = null;
 })->name('recrutamento');
 
+//disclaimer
 $app->get('/disclaimer','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
     $sth = $db->prepare('SELECT * FROM disclaimers where type = ?');
@@ -170,11 +178,13 @@ $app->get('/disclaimer','handleLang', function () use ($app, $menu, $social, $db
     $db = null;
 })->name('disclaimer');
 
+//testemunhos
 $app->get('/testemunhos','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
     $app->redirect($app->urlFor('recrutamento'));
 });
 
+//testemunhos/id
 $app->get('/testemunhos/:id','handleLang', function ($id) use ($app, $menu, $social, $db) {
     global $globalLang;
     $sth = $db->prepare('SELECT * FROM testemunhos where id = ?');
@@ -185,6 +195,7 @@ $app->get('/testemunhos/:id','handleLang', function ($id) use ($app, $menu, $soc
     $db = null;
 });
 
+//equipa
 $app->get('/equipa','handleLang', function () use ($app, $menu, $social, $db) {
 
     global $globalLang;
@@ -219,6 +230,7 @@ $app->get('/equipa','handleLang', function () use ($app, $menu, $social, $db) {
     $db = null;
 });
 
+//equipa/id
 $app->get('/equipa/:id','handleLang', function ($id) use ($app, $menu, $social, $db) {
     global $globalLang;
     if($globalLang == 'pt') {
@@ -234,7 +246,7 @@ $app->get('/equipa/:id','handleLang', function ($id) use ($app, $menu, $social, 
     $db = null;
 });
 
-// GET route
+//image
 $app->get('/image/:type/:image', function ($type, $image) use ($app, $db) {
 
 
@@ -251,7 +263,7 @@ $app->get('/image/:type/:image', function ($type, $image) use ($app, $db) {
 
 });
 
-// ADMIN routes
+//admin
 $app->group('/admin', function () use ($app, $db) {
 
     $app->get('/', function () use ($app) {
@@ -856,7 +868,7 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->render('admin\\areasAdd.php', array("user" => $user[0]));
         $db = null;
-    })->name('sociedadeAdd');
+    })->name('areasAdd');
 
     $app->post('/areas/add', 'handleSession', function () use ($app, $db) {
         try {
@@ -878,7 +890,7 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->redirect('/admin/areas');
 
-    })->name('sociedadeAddSave');
+    })->name('areasAddSave');
 
     $app->post('/areas/delete', 'handleSession', function () use ($app, $db) {
 
@@ -895,7 +907,7 @@ $app->group('/admin', function () use ($app, $db) {
 
         $app->redirect('/admin/areas');
 
-    })->name('sociedadeDelete');
+    })->name('areasDelete');
 
     $app->get('/sociedade', 'handleSession', function () use ($app, $db) {
         $sth = $db->prepare('SELECT * FROM admins where id = ?');
