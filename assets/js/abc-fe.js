@@ -290,6 +290,41 @@ $(function () {
         }
     });
 
+    $(".hasPeople").on("click", function (ev) {
+
+        var searchString = ev.target.getAttribute("data-letter");
+
+            $(".teamList").empty();
+            members.forEach(function (elm) {
+
+                if (elm.name.toUpperCase().charAt(0) === searchString.toUpperCase()) {
+                    var section = document.createElement("DIV");
+                    section.setAttribute("class", "section");
+
+                    var sectionTitle = document.createElement("SPAN");
+                    sectionTitle.setAttribute("class", "sectionTitle");
+                    sectionTitle.innerHTML = elm.name;
+                    section.appendChild(sectionTitle);
+
+                    var sectionBody = document.createElement("DIV");
+                    sectionBody.setAttribute("class", "sectionBody");
+                    sectionBody.innerHTML = elm.position;
+                    section.appendChild(sectionBody);
+
+                    var sectionLink = document.createElement("SPAN");
+                    sectionLink.setAttribute("class", "sectionLink");
+                    var sectionLinkA = document.createElement("A");
+                    sectionLinkA.setAttribute("href", "/equipa/" + elm.id);
+                    sectionLinkA.innerHTML = "Saiba Mais";
+                    sectionLink.appendChild(sectionLinkA);
+                    section.appendChild(sectionLink);
+
+                    $(".teamList").append(section);
+
+                }
+            });
+
+    });
     /*
      *
      * $(".areaSquare").animate({ "left": "-="+($(".areaSquare").width()+2)+"px" }, "slow" )

@@ -280,3 +280,12 @@ a:hover {color:#2d2d2d}
 .pagination li{display: inline-block;border-style: solid;border-color: #000;border-width: 1px;line-height: 30px;width: 30px;}
 
 .pagination li.currentPage {background-color: #000;color: #fff;}
+
+@media (min-width:850px){
+    .teamLetterList {background-color: #d2d2d2;height: 2em;padding-left: 11%;}
+    .teamLetterList span {width: 3%;display: inline-block;text-transform: uppercase;}
+    .teamLetterList span.hasPeople {font-weight: bold;cursor: pointer;}
+}
+@media (max-width:600px){
+    .teamLetterList{display:none;}
+}
