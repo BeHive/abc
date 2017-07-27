@@ -8,11 +8,11 @@
 <div class="abc-main" style="margin-left:300px;margin-top:43px;">
   <!-- Header -->
   <header class="abc-container" style="padding-top:22px">
-    <h5><b><i class="fa fa-pencil"></i> Adicionar novo post</b></h5>
+    <h5><b><i class="fa fa-newspaper-o"></i> Adicionar nova notícia</b></h5>
   </header>
 
 <div class="abc-container">
-<form action="/admin/blog/add" method="post" enctype="multipart/form-data" onsubmit="doSave()">
+<form action="/admin/news/add" method="post" enctype="multipart/form-data" onsubmit="doSave()">
 
     <p><input class="abc-input abc-padding-16 abc-border" type="text" placeholder="Titulo" required="" name="title"></p>
     <p><input class="abc-input abc-padding-16 abc-border" type="text" placeholder="Autor" required="" name="author"></p>

@@ -451,6 +451,30 @@ Ink.requireModules([
             });
         });
 
+        Ink.routeAdd(['/admin/news'], [], function () {
+            setMenu("news");
+        });
+
+        Ink.routeAdd(['/admin/news/add'], [], function () {
+            tinymce.init({
+                selector: "#item-text",
+                height: 300,
+                plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste code"],
+                readonly: 0,
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+        });
+
+        Ink.routeAdd(['/admin/news/edit'], [], function () {
+            tinymce.init({
+                selector: "#item-text",
+                height: 300,
+                plugins: ["advlist autolink lists link image charmap print preview anchor", "searchreplace visualblocks code fullscreen", "insertdatetime media table contextmenu paste code"],
+                readonly: 0,
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+        });
+
         Ink.routeRun();
     });
 });

@@ -289,3 +289,7 @@ a:hover {color:#2d2d2d}
 @media (max-width:600px){
     .teamLetterList{display:none;}
 }
+
+.comMenu a {display: inline-block;width: 48%;text-align: center;margin-left: 1%;}
+.comMenu a.comActive{box-shadow: 0px 3px 6px #888888;}
+.comMenu {background-color: #d2d2d2;height: 2em;line-height: 2em;font-size: 22px;}

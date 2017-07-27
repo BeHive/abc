@@ -25,6 +25,18 @@
             </a>
         </div>
         <div class="abc-quarter">
+            <a href="/admin/news" style="text-decoration: none;">
+                <div class="abc-container abc-purple abc-padding-16">
+                    <div class="abc-left"><i class="fa fa-newspaper-o abc-xxxlarge"></i></div>
+                    <div class="abc-right">
+                        <h3><?=$amounts['news']?></h3>
+                    </div>
+                    <div class="abc-clear"></div>
+                    <h4>Notícias</h4>
+                </div>
+            </a>
+        </div>
+        <div class="abc-quarter">
             <a href="/admin/testimonials" style="text-decoration: none;">
                 <div class="abc-container abc-blue abc-padding-16">
                     <div class="abc-left"><i class="fa fa-comments-o abc-xxxlarge"></i></div>
@@ -48,18 +60,6 @@
                 </div>
             </a>
         </div>
-        <div class="abc-quarter">
-            <a href="/admin/admins" style="text-decoration: none;">
-                <div class="abc-container abc-orange abc-text-white abc-padding-16">
-                    <div class="abc-left"><i class="fa fa-cog abc-xxxlarge"></i></div>
-                    <div class="abc-right">
-                        <h3><?=$amounts['admins']?></h3>
-                    </div>
-                    <div class="abc-clear"></div>
-                    <h4>Administradores</h4>
-                </div>
-            </a>
-        </div>
     </div>
     <div class="abc-row-padding abc-margin-bottom">
         <div class="abc-quarter">
@@ -71,6 +71,18 @@
                     </div>
                     <div class="abc-clear"></div>
                     <h4>Mensagens</h4>
+                </div>
+            </a>
+        </div>
+        <div class="abc-quarter">
+            <a href="/admin/admins" style="text-decoration: none;">
+                <div class="abc-container abc-orange abc-text-white abc-padding-16">
+                    <div class="abc-left"><i class="fa fa-cog abc-xxxlarge"></i></div>
+                    <div class="abc-right">
+                        <h3><?=$amounts['admins']?></h3>
+                    </div>
+                    <div class="abc-clear"></div>
+                    <h4>Administradores</h4>
                 </div>
             </a>
         </div>

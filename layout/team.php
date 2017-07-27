@@ -66,6 +66,11 @@
 
 <script>
     members.forEach(function(elm){
-        $("[data-letter='"+elm.name.charAt(0).toLowerCase()+"']").addClass("hasPeople");
+        var tokens = elm.name.split(" ");
+
+        tokens.forEach(function(name){
+            $("[data-letter='"+name.charAt(0).toLowerCase()+"']").addClass("hasPeople");
+        });
+
     })
 </script>

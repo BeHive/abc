@@ -113,7 +113,7 @@ $app->get('/comunicacao', 'handleLang', function () use ($app, $menu, $social, $
     $sth->execute(array());
     $blog = $sth->fetchAll();
 
-    $app->render('comunicacao.php', array("section" => "comunicacao","sectionTitle"=>$globalLang == 'pt'?"comunicação":"communication","blog" => $blog,'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
+    $app->render('comunicacao.php', array("subtype" => "blog", "section" => "comunicacao","sectionTitle"=>$globalLang == 'pt'?"comunicação":"communication","blog" => $blog,'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
     $db = null;
 })->name('comunicacao');
 
@@ -127,6 +127,29 @@ $app->get('/comunicacao/:id', 'handleLang', function ($id) use ($app, $menu, $so
     $app->render('post.php', array("section" => "comunicacao","sectionTitle"=>$globalLang == 'pt'?"comunicação":"communication","blog" => $blog[0],'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
     $db = null;
 })->name('comunicacaoPost');
+
+//noticias
+$app->get('/noticias', 'handleLang', function () use ($app, $menu, $social, $db) {
+    global $globalLang;
+
+    $sth = $db->prepare('SELECT * FROM news order by date desc');
+    $sth->execute(array());
+    $news = $sth->fetchAll();
+
+    $app->render('comunicacao.php', array("subtype" => "news", "section" => "comunicacao","sectionTitle"=>$globalLang == 'pt'?"comunicação":"communication","blog" => $news,'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
+    $db = null;
+})->name('noticias');
+
+//noticias/id
+$app->get('/noticias/:id', 'handleLang', function ($id) use ($app, $menu, $social, $db) {
+    global $globalLang;
+    $sth = $db->prepare('SELECT * FROM news where id = ?');
+    $sth->execute(array($id));
+    $news = $sth->fetchAll();
+
+    $app->render('post.php', array("section" => "comunicacao","sectionTitle"=>$globalLang == 'pt'?"comunicação":"communication","blog" => $news[0],'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db,));
+    $db = null;
+})->name('noticiasPost');
 
 //areas
 $app->get('/areas','handleLang', function () use ($app, $menu, $social, $db) {
@@ -302,7 +325,7 @@ $app->group('/admin', function () use ($app, $db) {
             $sth->execute(array($_SESSION["currentUser"]));
             $user = $sth->fetchAll();
 
-            $sth = $db->prepare("select count(*) from admins union all select count(*) from team union all select count(*) from testemunhos union all select count(*) from blog union all select count(*) from mensagens where mensagens.read = 0");
+            $sth = $db->prepare("select count(*) from admins union all select count(*) from team union all select count(*) from testemunhos union all select count(*) from blog union all select count(*) from news union all select count(*) from mensagens where mensagens.read = 0");
             $sth->execute(array());
             $amounts = $sth->fetchAll();
 
@@ -311,7 +334,8 @@ $app->group('/admin', function () use ($app, $db) {
                 'team' => $amounts[1][0],
                 'testemunhos' => $amounts[2][0],
                 'blog' => $amounts[3][0],
-                'mensagens' => $amounts[4][0],
+                'news' => $amounts[4][0],
+                'mensagens' => $amounts[5][0],
             )));
             $db = null;
         }
@@ -1093,6 +1117,95 @@ $app->group('/admin', function () use ($app, $db) {
 
     })->name('blogDelete');
 
+    $app->get('/news', 'handleSession', function () use ($app, $db) {
+        $sth = $db->prepare('SELECT * FROM admins where id = ?');
+        $sth->execute(array($_SESSION["currentUser"]));
+        $user = $sth->fetchAll();
+
+        $sth = $db->prepare('SELECT * FROM news order by date desc');
+        $sth->execute(array());
+        $news = $sth->fetchAll();
+
+        $app->render('admin\\news.php', array("user" => $user[0], "news" => $news));
+        $db = null;
+    })->name('news');
+
+    $app->get('/news/edit/:id', 'handleSession', function ($id) use ($app, $db) {
+        $sth = $db->prepare('SELECT * FROM admins where id = ?');
+        $sth->execute(array($_SESSION["currentUser"]));
+        $user = $sth->fetchAll();
+
+
+        $sth = $db->prepare('SELECT * FROM news where id = ?');
+        $sth->execute(array($id));
+        $news = $sth->fetchAll();
+
+        $app->render('admin\\newsEdit.php', array("user" => $user[0], 'news' => $news[0]));
+        $db = null;
+    })->name('newsEdit');
+
+    $app->post('/news/edit/:id', 'handleSession', function ($id) use ($app, $db) {
+
+        try {
+            $author = utf8_encode($app->request->post('author'));
+            $title = utf8_encode($app->request->post('title'));
+            $text = utf8_encode($app->request->post('text'));
+
+            $sth = $db->prepare('UPDATE news set author = ? ,title = ? ,text = ? where id = ? ');
+            $sth->execute(array($author, $title, $text, $id));
+
+            flash('green', "Notiícia alterada com sucesso");
+        } catch (Exception $e) {
+            flash('red', "Ocorreu um erro. Por favor tente novamente");
+        }
+
+        $app->redirect('/admin/news');
+
+    })->name('newsEditSave');
+
+    $app->get('/news/add', 'handleSession', function () use ($app, $db) {
+        $sth = $db->prepare('SELECT * FROM admins where id = ?');
+        $sth->execute(array($_SESSION["currentUser"]));
+        $user = $sth->fetchAll();
+
+        $app->render('admin\\newsAdd.php', array("user" => $user[0]));
+        $db = null;
+    })->name('newsAdd');
+
+    $app->post('/news/add', 'handleSession', function () use ($app, $db) {
+
+        try {
+            $author = utf8_encode($app->request->post('author'));
+            $title = utf8_encode($app->request->post('title'));
+            $text = utf8_encode($app->request->post('text'));
+
+            $sth = $db->prepare('INSERT INTO news (author,title,text,date) VALUES (?,?,?,now())');
+            $sth->execute(array($author, $title, $text));
+            flash('green', "Notícia adicionada com sucesso");
+        } catch (Exception $e) {
+            flash('red', "Ocorreu um erro. Por favor tente novamente");
+        }
+
+        $app->redirect('/admin/news');
+
+    })->name('newsAddSave');
+
+    $app->post('/news/delete', 'handleSession', function () use ($app, $db) {
+
+        try {
+            $news = utf8_encode($app->request->post('newsId'));
+
+            $sth = $db->prepare('delete from news where id = ?');
+            $sth->execute(array($news));
+
+            flash('green', "Notícia removida com sucesso");
+        } catch (Exception $e) {
+            flash('red', "Ocorreu um erro. Por favor tente novamente");
+        }
+
+        $app->redirect('/admin/news');
+
+    })->name('newsDelete');
 
     $app->get('/logout', function () use ($app) {
         session_unset();

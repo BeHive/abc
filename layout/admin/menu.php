@@ -19,6 +19,7 @@
     <a data-menu="areaspratica" href="/admin/areas" class="abc-padding"><i class="fa fa-balance-scale  fa-fw"></i>&nbsp; Áreas de Prática</a>
     <a data-menu="equipa" href="/admin/team" class="abc-padding"><i class="fa fa-users fa-fw"></i>&nbsp; Equipa</a>
     <a data-menu="blog" href="/admin/blog" class="abc-padding"><i class="fa fa-pencil fa-fw"></i>&nbsp; Blog</a>
+    <a data-menu="news" href="/admin/news" class="abc-padding"><i class="fa fa-newspaper-o fa-fw"></i>&nbsp; Notícias</a>
     <a data-menu="recrutamento" href="/admin/recrutamento" class="abc-padding"><i class="fa fa-handshake-o fa-fw"></i>&nbsp;Recrutamento</a>
     <a data-menu="testemunhos" href="/admin/testimonials" class="abc-padding"><i class="fa fa-comments-o fa-fw"></i>&nbsp;Testemunhos</a>
     <a data-menu="disclaimer" href="/admin/disclaimer" class="abc-padding"><i class="fa fa-info-circle fa-fw"></i>&nbsp;Disclaimer</a>

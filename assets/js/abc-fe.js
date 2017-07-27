@@ -294,10 +294,12 @@ $(function () {
 
         var searchString = ev.target.getAttribute("data-letter");
 
-            $(".teamList").empty();
-            members.forEach(function (elm) {
-
-                if (elm.name.toUpperCase().charAt(0) === searchString.toUpperCase()) {
+        $(".teamList").empty();
+        members.forEach(function (elm) {
+            var tokens = elm.name.split(" ");
+            var added = false;
+            tokens.forEach(function(name){
+                if (!added && name.toUpperCase().charAt(0) === searchString.toUpperCase()) {
                     var section = document.createElement("DIV");
                     section.setAttribute("class", "section");
 
@@ -320,9 +322,11 @@ $(function () {
                     section.appendChild(sectionLink);
 
                     $(".teamList").append(section);
-
+                    added = true;
                 }
             });
+
+        });
 
     });
     /*

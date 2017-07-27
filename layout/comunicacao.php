@@ -1,5 +1,10 @@
 <? include "header.php" ?>
 
+    <div class="comMenu">
+        <a class="<?= $subtype == 'blog' ? 'comActive' : '' ?>" href="/comunicacao<?= $lang == 'pt' ? '' : '?lang=en' ?>">Blog</a>
+        <a class="<?= $subtype == 'news' ? 'comActive' : '' ?>" href="/noticias<?= $lang == 'pt' ? '' : '?lang=en' ?>">Notícias</a>
+    </div>
+
     <div class="comunicacao">
 
         <?
@@ -21,6 +26,9 @@
 
         ?>
         <?php
+
+        if(count($blog) > 0){
+
         foreach($blog as $k => $v) {
             ?>
 
@@ -57,5 +65,17 @@
                 </ul>
             </div>
         <? } ?>
+            <? }
+            else{?>
+
+                <div class="section">
+                    <?if($lang == 'pt'){?>
+                        <div class="sectionTitle">Pedimos desculpa mas não existem conteúdos a apresentar.</div>
+                    <?}else{?>
+                        <div class="sectionTitle">We are sorry, but currently there are no contents to show you.</div>
+                    <?}?>
+                </div>
+
+            <?}?>
     </div>
 <? include "footer.php" ?>
