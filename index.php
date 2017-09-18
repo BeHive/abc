@@ -201,6 +201,14 @@ $app->get('/disclaimer','handleLang', function () use ($app, $menu, $social, $db
     $db = null;
 })->name('disclaimer');
 
+//politica-de-cookies
+$app->get('/politica-de-cookies','handleLang', function () use ($app, $menu, $social, $db) {
+    global $globalLang;
+
+    $app->render('bolachas.php', array("section" => "disclaimer","sectionTitle"=>$globalLang == 'pt'?"política de cookies":"cookie policy",'lang'=>$globalLang,'menu' => $menu, 'social' => $social, 'db' => $db));
+    $db = null;
+})->name('bolachas');
+
 //testemunhos
 $app->get('/testemunhos','handleLang', function () use ($app, $menu, $social, $db) {
     global $globalLang;
